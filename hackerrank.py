@@ -1,79 +1,38 @@
-#program-1
-if __name__ == '__main__':
-    print("Hello, World!")
+"""When users post an update on social media,such as a URL, image, status update etc., other users in their network are able to view this new post on their news feed. Users can also see exactly when the post was published, i.e, how many hours, minutes or seconds ago.
 
-#program-2
-if __name__ == '__main__':
-    n = int(input().strip())
-if n%2!=0:
-    print("Weird")
-elif n%2==0 and n>=2 and n<=5:
-    print("Not Weird")
-elif n%2==0 and n>=6 and n<=20:
-    print("Weird")
-else:
-    print("Not Weird")
+Since sometimes posts are published and viewed in different time zones, this can be confusing. You are given two timestamps of one such post that a user can see on his newsfeed in the following format:
 
-#program-3
-if __name__ == '__main__':
-    a = int(input())
-    b = int(input())
-    print(a+b)
-    print(a-b)
-    print(a*b)
+Day dd Mon yyyy hh:mm:ss +xxxx
 
-#program-4
-if __name__ == '__main__':
-    a = int(input())
-    b = int(input())
-    print(a//b)
-    print(a/b)
+Here +xxxx represents the time zone. Your task is to print the absolute difference (in seconds) between them.
 
-#program-5
-if __name__ == '__main__':
-    n = int(input())
-    sum = 0
-    for i in range (0, n):
-        print(i**2)
+Input Format
 
-#program-6
-def is_leap(year):
-    leap = False
+The first line contains , the number of testcases.
+Each testcase contains  lines, representing time"""
+
+# Complete the time_delta function below.
+def time_delta(t1, t2):
+    # Parse timestamps
+    dt1 = datetime.strptime(t1, '%a %d %b %Y %H:%M:%S %z')
+    dt2 = datetime.strptime(t2, '%a %d %b %Y %H:%M:%S %z')
+
+    # Calculate time difference in seconds
+    delta_seconds = abs((dt1 - dt2).total_seconds())
     
-    # Write your logic here
-    if year%400==0 and year%100==0:
-        return True
-    elif year%4==0 and year%100!=0:
-        return True
-    else:
-        return False
-    return leap
-year = int(input())
-print(is_leap(year))
+    return str(int(delta_seconds))
 
-#program-7 
 if __name__ == '__main__':
-    n = int(input())
-    for i in range(1,n+1):
-        print(i, end="")
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
-#program-8
-a = int(input())
-b = int(input())
-print(a//b)
-print(a%b)
-print(divmod(a,b))
+    t = int(input())
 
-#program-9
-a = int(input())
-b = int(input())
-m = int(input())
-print(pow(a,b))
-print(pow(a,b,m))
+    for _ in range(t):
+        t1 = input()
+        t2 = input()
 
-#program-10
-a = int(input())
-b = int(input())
-c = int(input())
-d = int(input())
-print(pow(a,b)+pow(c,d))
+        delta = time_delta(t1, t2)
+
+        fptr.write(delta + '\n')
+
+    fptr.close()
