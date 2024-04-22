@@ -36,3 +36,28 @@ if __name__ == '__main__':
         fptr.write(delta + '\n')
 
     fptr.close()
+
+#Program-2
+def average_marks(student_marks, query_name):
+    # Check if the query_name exists in the student_marks dictionary
+    if query_name in student_marks:
+        # Calculate the average of marks for the given student
+        average = sum(student_marks[query_name]) / len(student_marks[query_name])
+        # Print the average marks rounded to 2 decimal places
+        print("{:.2f}".format(average))
+    else:
+        print("Student {} not found.".format(query_name))
+
+if __name__ == '__main__':
+    n = int(input())  # Number of students' records
+    student_marks = {}  # Dictionary to store student names and marks
+
+    # Read student records
+    for _ in range(n):
+        line = input().split()
+        name = line[0]
+        marks = list(map(float, line[1:]))  # Convert marks to float
+        student_marks[name] = marks
+
+    query_name = input()  # Name of the student to query
+    average_marks(student_marks, query_name)
